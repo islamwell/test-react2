@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Box, IconButton, Paper } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
@@ -114,14 +114,14 @@ export default function ListItem({ data, currentPlayingPosition }) {
         }
     };
 
-    // useEffect(() => {
-    //     caches
-    //         .match(new Request(link))
-    //         .then((res) => {
-    //             if (res) setIsDownloaded(true); //checking whether already downloaaded
-    //         })
-    //         .catch((e) => {});
-    // }, [downloadingIds, link]);
+    useEffect(() => {
+        caches
+            .match(new Request(link))
+            .then((res) => {
+                if (res) setIsDownloaded(true); //checking whether already downloaaded
+            })
+            .catch((e) => {});
+    }, [downloadingIds, link]);
 
     return (
         <Paper variant="outlined" className={classes.mainContainer}>
