@@ -20,7 +20,6 @@ const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
     backgroundColor: "#f7f7f7",
-    minWidth: "1100px",
     minHeight: `calc(100vh - 120px)`,
     padding: theme.spacing(5, 0, 10, 0),
   },
@@ -47,7 +46,7 @@ export default function Home() {
   const dispatch = useDispatch();
 
   const { offlineMode } = useSelector((state) => state.download);
-  const { playing, topChart } = useSelector((state) => state.player);
+  let { playing, topChart } = useSelector((state) => state.player);
 
   const { loading, totalPages, currentPage, audioList, changePage } = useData({ offlineMode: offlineMode });
 
@@ -60,9 +59,19 @@ export default function Home() {
 
 
   useEffect(() => {
-    dispatch(fetchTopChart());
+    dispatch(fetchTopChart(1));
   }, []);
 
+  const getMore = () => {
+    let i = 1;
+    if(i >= 1 && i <= 7) {
+      i++;
+      dispatch(fetchTopChart(i))
+    }
+    console.log('top >>> ', topChart)
+  }
+  
+  
   useEffect(() => {
     window?.scrollTo({
       top: 0,
@@ -70,12 +79,14 @@ export default function Home() {
     });
   }, [currentPage]);
 
+  
+
   return (
     <div style={playing ? { paddingBottom: 150 } : { paddingBottom: 50 }} className={classes.root}>
       <Container maxWidth="md" >
-        <Grid container spacing={3}  >
-          <Grid item xs={12} className={classes.pos} >
-            <TopChart data={topChart}  />
+        <Grid container spacing={3}   >
+          <Grid item xs={12} >
+            <TopChart data={topChart} getMore={getMore} />
           </Grid>
 
           <Grid item xs={12} md={8}>

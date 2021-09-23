@@ -12,7 +12,7 @@ import 'swiper/components/navigation/navigation.scss'
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: theme.spacing(2),
-    // minWidth: "1170px",
+    
     [theme.breakpoints.down("xs")]: {
       marginBottom: theme.spacing(0),
     },
@@ -51,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 SwiperCore.use([Navigation, Autoplay]);
 
 
-export default function TopChart({ data }) {
+export default function TopChart({ data, getMore }) {
   const classes = useStyles();
   const dispatch = useDispatch();
 
@@ -67,8 +67,7 @@ export default function TopChart({ data }) {
       })
     );
   };
-  // console.log('data >>> ' + data)
-  
+
 
   return (
     <div className={classes.root}>
@@ -76,12 +75,23 @@ export default function TopChart({ data }) {
         Most Popular
       </Box>
       <Swiper
-            spaceBetween={50}
+            spaceBetween={0}
             slidesPerView={3} 
             autoplay={{
-                delay: 3000,
+              delay: 2000,
             }} 
+            breakpoints={{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 1
+              },
+              560: {
+                slidesPerView: 3,
+                spaceBetween: 2
+              }
+            }}
             navigation
+            onClick={getMore}
       >
           {data?.map((item) => (
             <SwiperSlide onClick={() => handlePlay(item)} className={classes.item} key={item.id}>

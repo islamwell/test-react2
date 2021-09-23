@@ -2,10 +2,11 @@ import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 import axios from "axios";
 import { domain } from "../../data/config";
 
-export const fetchTopChart = createAsyncThunk("player/fetchTopChart", async (_, { dispatch, getState }) => {
+export const fetchTopChart = createAsyncThunk("player/fetchTopChart", async (i, { dispatch, getState }) => {
     try {
-        const response = await axios.get(`${domain}/index.php/api/topSong?page=1`);
-        return response.data.data;
+            const response = await axios.get(`${domain}/index.php/api/topSong?page=${i}`);
+            return response.data.data;
+        
     } catch (error) {}
 });
 
@@ -21,7 +22,6 @@ export const playerSlice = createSlice({
         categoryId: null,
         recentlyPlayed: [],
         topChart: [],
-        topChartRadio: [],
         currentAudioList: [],
         currentPlayingPosition: "home",
     },
