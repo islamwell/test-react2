@@ -63,12 +63,7 @@ export default function Home() {
   }, []);
 
   const getMore = () => {
-    let i = 1;
-    if(i >= 1 && i <= 7) {
-      i++;
-      dispatch(fetchTopChart(i))
-    }
-    console.log('top >>> ', topChart)
+      dispatch(fetchTopChart(2))
   }
   
   
