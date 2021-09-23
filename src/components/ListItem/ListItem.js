@@ -114,14 +114,14 @@ export default function ListItem({ data, currentPlayingPosition }) {
         }
     };
 
-    useEffect(() => {
-        caches
-            .match(new Request(link))
-            .then((res) => {
-                if (res) setIsDownloaded(true); //checking whether already downloaaded
-            })
-            .catch((e) => {});
-    }, [downloadingIds, link]);
+    // useEffect(() => {
+    //     caches
+    //         .match(new Request(link))
+    //         .then((res) => {
+    //             if (res) setIsDownloaded(true); //checking whether already downloaaded
+    //         })
+    //         .catch((e) => {});
+    // }, [downloadingIds, link]);
 
     return (
         <Paper variant="outlined" className={classes.mainContainer}>

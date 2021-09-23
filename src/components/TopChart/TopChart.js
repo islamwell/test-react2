@@ -1,7 +1,7 @@
 import React from "react";
 import { Box } from "@material-ui/core";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Autoplay } from "swiper";
+import SwiperCore, { Navigation, Autoplay, EffectFade } from "swiper";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { changeURL } from "../../store/slices/playerSlice";
@@ -12,13 +12,14 @@ import 'swiper/components/navigation/navigation.scss'
 const useStyles = makeStyles((theme) => ({
   root: {
     marginBottom: theme.spacing(2),
-    
+
     [theme.breakpoints.down("xs")]: {
       marginBottom: theme.spacing(0),
     },
   },
   paper: {
     padding: theme.spacing(2),
+    minWidth: 850,
     textAlign: "center",
     color: theme.palette.text.secondary,
   },
@@ -49,7 +50,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-SwiperCore.use([Navigation, Autoplay]);
+SwiperCore.use([Navigation, Autoplay, EffectFade]);
 
 
 export default function TopChart({ data, getMore }) {
@@ -77,10 +78,10 @@ export default function TopChart({ data, getMore }) {
       </Box>
       <Swiper
             slidesPerView={4}
-            spaceBetween={-105}
+            spaceBetween={0}
             loop={true}
             autoplay={{
-              delay: 1500,
+              delay: 2500,
               disableOnInteraction: false
             }} 
             breakpoints={{

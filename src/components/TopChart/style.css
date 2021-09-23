@@ -1,5 +1,6 @@
 .swiper-slide {
     width: auto;
+    scroll-behavior: smooth;
 }
 
 .swiper-container {
