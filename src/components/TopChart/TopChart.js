@@ -78,7 +78,7 @@ export default function TopChart({ data, getMore }) {
             spaceBetween={-75}
             slidesPerView={3} 
             autoplay={{
-              delay: 2000,
+              delay: 3500,
             }} 
             breakpoints={{
               320: {
@@ -94,9 +94,9 @@ export default function TopChart({ data, getMore }) {
             onClick={getMore}
       >
           {data?.map((item) => (
-            <SwiperSlide onClick={() => handlePlay(item)} className={classes.item} key={item.id}>
-              <Box>
-                <Image src={item.image} className={classes.image} />
+            <SwiperSlide  className={classes.item} key={item.id}>
+              <Box  >
+                <Image onClick={() => handlePlay(item)} src={item.image} className={classes.image} />
               </Box>
               <Box textAlign="center" textOverflow="ellipsis" overflow="hidden" py={1} fontSize={12}>
                 {item.name}
