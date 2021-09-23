@@ -75,7 +75,7 @@ export default function TopChart({ data, getMore }) {
         Most Popular
       </Box>
       <Swiper
-            spaceBetween={0}
+            spaceBetween={-75}
             slidesPerView={3} 
             autoplay={{
               delay: 2000,
