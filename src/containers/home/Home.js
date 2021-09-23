@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import { Box, Container, useTheme } from "@material-ui/core";
@@ -44,6 +44,7 @@ export default function Home() {
   const classes = useStyles();
   const theme = useTheme();
   const dispatch = useDispatch();
+  const [num, setNum] = useState(1)
 
   const { offlineMode } = useSelector((state) => state.download);
   let { playing, topChart } = useSelector((state) => state.player);
@@ -63,7 +64,13 @@ export default function Home() {
   }, []);
 
   const getMore = () => {
-      dispatch(fetchTopChart(2))
+    if (num>=1 && num<=7) {
+        setNum(num+1)
+        dispatch(fetchTopChart(num))
+      }
+      if(num>7) {
+        setNum(2)
+      }
   }
   
   

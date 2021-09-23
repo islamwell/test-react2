@@ -42,6 +42,7 @@ const useStyles = makeStyles((theme) => ({
   item: {
     cursor: "pointer",
     width: 150,
+    padding: theme.spacing(0),
     [theme.breakpoints.down("xs")]: {
       width: 10,
     },
@@ -75,10 +76,12 @@ export default function TopChart({ data, getMore }) {
         Most Popular
       </Box>
       <Swiper
-            spaceBetween={-75}
-            slidesPerView={3} 
+            slidesPerView={4}
+            spaceBetween={-105}
+            loop={true}
             autoplay={{
-              delay: 3500,
+              delay: 1500,
+              disableOnInteraction: false
             }} 
             breakpoints={{
               320: {
@@ -86,8 +89,12 @@ export default function TopChart({ data, getMore }) {
                 spaceBetween: 1
               },
               560: {
-                slidesPerView: 3,
+                slidesPerView: 2,
                 spaceBetween: 2
+              },
+              960: {
+                slidesPerView: 4,
+                spaceBetween: 0
               }
             }}
             navigation
