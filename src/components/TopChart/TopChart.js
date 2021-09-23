@@ -1,13 +1,13 @@
 import React from "react";
 import { Box } from "@material-ui/core";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Navigation, Autoplay, EffectFade } from "swiper";
 import { makeStyles } from "@material-ui/core/styles";
 import { useDispatch } from "react-redux";
 import { changeURL } from "../../store/slices/playerSlice";
 import Image from "../Image";
-import 'swiper/swiper.scss';
-import 'swiper/components/navigation/navigation.scss'
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,7 +50,6 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-SwiperCore.use([Navigation, Autoplay, EffectFade]);
 
 
 export default function TopChart({ data, getMore }) {
@@ -70,49 +69,66 @@ export default function TopChart({ data, getMore }) {
     );
   };
 
+  let settings = {
+    dots: false,
+    infinite: true,
+    slidesToShow: 5,
+    slidesToScroll: 1,
+    autoplay: true,
+    speed: 2000,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 3,
+          infinite: true,
+          dots: false
+        }
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 2,
+          initialSlide: 2
+        }
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1
+        }
+      }
+    ],
+    autoplaySpeed: 2000,
+    cssEase: "linear",
+    
+  };
 
   return (
     <div className={classes.root}>
       <Box className={classes.title} mb={3} ml={1} fontSize="h4.fontSize" fontWeight="fontWeightBold">
         Most Popular
       </Box>
-      <Swiper
-            slidesPerView={4}
-            spaceBetween={0}
-            loop={true}
-            autoplay={{
-              delay: 2500,
-              disableOnInteraction: false
-            }} 
-            breakpoints={{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 1
-              },
-              560: {
-                slidesPerView: 2,
-                spaceBetween: 2
-              },
-              960: {
-                slidesPerView: 4,
-                spaceBetween: 0
-              }
-            }}
-            navigation
-            onClick={getMore}
-      >
+      <div onClick={getMore}>
+        <Slider 
+          
+        {...settings}>
           {data?.map((item) => (
-            <SwiperSlide  className={classes.item} key={item.id}>
+            <div  className={classes.item} key={item.id}>
               <Box  >
                 <Image onClick={() => handlePlay(item)} src={item.image} className={classes.image} />
               </Box>
               <Box textAlign="center" textOverflow="ellipsis" overflow="hidden" py={1} fontSize={12}>
                 {item.name}
               </Box>
-            </SwiperSlide>
+            </div>
           ))}
           
-        </Swiper>
+          </Slider>
+          </div>
     </div>
   );
 }
