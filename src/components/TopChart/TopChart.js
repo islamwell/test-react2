@@ -75,7 +75,7 @@ export default function TopChart({ data, getMore }) {
     slidesToShow: 5,
     slidesToScroll: 1,
     autoplay: true,
-    speed: 2000,
+    speed: 2500,
     responsive: [
       {
         breakpoint: 1024,
